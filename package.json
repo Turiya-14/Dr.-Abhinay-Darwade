@@ -1,0 +1,33 @@
+{
+  "name": "darwade-profile",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Personal profile and IAP campaign landing page for Dr. Abhinay Bhaskar Darwade",
+  "type": "module",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
+    "build": "npm run typecheck && vite build && vite build --ssr src/entry-server.tsx --outDir .prerender --emptyOutDir && node scripts/prerender.mjs",
+    "build:standalone": "npm run typecheck && vite build -c vite.standalone.config.ts && node scripts/inline-standalone.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "framer-motion": "^14.0.0",
+    "lucide-react": "^1.52.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.3"
+  }
+}

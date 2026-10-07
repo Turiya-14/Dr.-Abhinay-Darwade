@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.prerender/
+.standalone/
+dist-standalone/
+*.log
+.DS_Store
