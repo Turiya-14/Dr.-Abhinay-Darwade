@@ -1,0 +1,20 @@
+# Standalone deploy: lives separately from the veena-group stack.
+# It only joins the existing Traefik's network to get routing + HTTPS.
+services:
+  site:
+    build: .
+    container_name: dr-darwade-site
+    restart: unless-stopped
+    networks: [traefik-web]
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=${TRAEFIK_NETWORK:-veena-group_web}
+      - traefik.http.routers.dr-darwade.rule=Host(`abhinaydarwade.in`) || Host(`www.abhinaydarwade.in`)
+      - traefik.http.routers.dr-darwade.entrypoints=websecure
+      - traefik.http.routers.dr-darwade.tls.certresolver=le
+      - traefik.http.services.dr-darwade.loadbalancer.server.port=80
+
+networks:
+  traefik-web:
+    external: true
+    name: ${TRAEFIK_NETWORK:-veena-group_web}
